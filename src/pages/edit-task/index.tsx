@@ -1,9 +1,11 @@
 import Typography from '@mui/material/Typography';
 
-export function EditTaskPage() {
+const EditTaskPage = () => {
     return (
         <Typography component="h1" gutterBottom variant="h4">
             Edit Task
         </Typography>
     );
-}
+};
+
+export default EditTaskPage;
