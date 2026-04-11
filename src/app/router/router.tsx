@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './layouts/root-layout';
-import { CreateTaskPage } from '../../pages/create-task';
-import { EditTaskPage } from '../../pages/edit-task';
-import { TaskDetailsPage } from '../../pages/task-details';
-import { TasksPage } from '../../pages/tasks';
+import CreateTaskPage from '../../pages/create-task';
+import EditTaskPage from '../../pages/edit-task';
+import TaskDetailsPage from '../../pages/task-details';
+import TasksPage from '../../pages/tasks';
 
 const router = createBrowserRouter([
     {
