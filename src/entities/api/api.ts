@@ -1,13 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import type {
-    CreateTagPayload,
-    CreateTaskPayload,
-    GetTasksParams,
-    Tag,
-    Task,
-    UpdateTaskPayload,
-} from './types';
+import type { CreateTagPayload, GetTasksParams, Tag } from './types';
+import type { CreateTaskPayload, Task, UpdateTaskPayload } from '../task/model/types';
 
 export const entitiesApi = createApi({
     reducerPath: 'entitiesApi',

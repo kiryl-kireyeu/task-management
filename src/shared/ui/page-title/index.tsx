@@ -1,10 +1,9 @@
 import Typography from '@mui/material/Typography';
-import type { PropsWithChildren } from 'react';
 
-const PageTitle = ({ children }: PropsWithChildren) => {
+const PageTitle = ({ title }: { title: string }) => {
     return (
-        <Typography component="h1" gutterBottom variant="h4">
-            {children}
+        <Typography component="h1" variant="h4">
+            {title}
         </Typography>
     );
 };
