@@ -4,7 +4,19 @@ export type TasksSortBy = 'createdAt' | 'deadline';
 
 export type SortOrder = 'asc' | 'desc';
 
+export interface PaginatedResponse<T> {
+    first: number;
+    prev: number | null;
+    next: number | null;
+    last: number;
+    pages: number;
+    items: number;
+    data: T[];
+}
+
 export interface GetTasksParams {
+    page?: number;
+    perPage?: number;
     status?: TaskStatus;
     priority?: TaskPriority;
     tag?: string;
