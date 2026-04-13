@@ -12,8 +12,9 @@ import { useNavigate } from 'react-router-dom';
 import TaskCardActions from './task-card-actions';
 import TaskCardDescription from './task-card-description';
 import TaskCardHeader from './task-card-header';
-import TaskCardTags from './task-card-tags';
+import TaskTags from './task-tags';
 import { useUpdateTaskStatusMutation } from '../../api/api';
+import { isTaskOverdue } from '../lib/is-task-overdue';
 import { PRIORITY_COLORS, PRIORITY_LABELS } from '../model/constants';
 import type { Task, TaskStatus } from '../model/types';
 
@@ -25,7 +26,7 @@ export interface TaskCardProps {
 const TaskCard = ({ task, onTagClick }: TaskCardProps) => {
     const navigate = useNavigate();
     const [updateStatus] = useUpdateTaskStatusMutation();
-    const isOverdue = dayjs(task.deadline).isBefore(dayjs(), 'day') && task.status !== 'done';
+    const isOverdue = isTaskOverdue(task);
 
     const handleStatusChange = useCallback(
         (event: SelectChangeEvent<TaskStatus>) => {
@@ -79,7 +80,7 @@ const TaskCard = ({ task, onTagClick }: TaskCardProps) => {
                     ) : null}
                 </Stack>
 
-                <TaskCardTags onTagClick={handleTagClick} tags={task.tags} />
+                <TaskTags onTagClick={handleTagClick} tags={task.tags} />
             </CardContent>
             <TaskCardActions onStatusChange={handleStatusChange} status={task.status} />
         </Card>
