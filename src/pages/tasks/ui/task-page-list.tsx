@@ -1,8 +1,7 @@
+import type { Task } from '@entities/task/model/types';
+import TaskCard from '@entities/task/ui/task-card';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-
-import type { Task } from '../../../entities/task/model/types';
-import TaskCard from '../../../entities/task/ui/task-card';
 
 interface TaskPageListProps {
     tasks: Task[];

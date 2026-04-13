@@ -1,3 +1,6 @@
+import { useDeleteTaskMutation, useGetTaskByIdQuery } from '@entities/api/api';
+import { isTaskOverdue } from '@entities/task/lib/is-task-overdue';
+import TaskTags from '@entities/task/ui/task-tags';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
@@ -5,17 +8,14 @@ import Paper from '@mui/material/Paper';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { skipToken } from '@reduxjs/toolkit/query';
+import Loader from '@shared/ui/loader';
+import PageError from '@shared/ui/page-error';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import TaskDeleteDialog from './ui/task-delete-dialog';
 import TaskDetailsActions from './ui/task-details-actions';
 import TaskDetailsMeta from './ui/task-details-meta';
-import { useDeleteTaskMutation, useGetTaskByIdQuery } from '../../entities/api/api';
-import { isTaskOverdue } from '../../entities/task/lib/is-task-overdue';
-import TaskTags from '../../entities/task/ui/task-tags';
-import Loader from '../../shared/ui/loader';
-import PageError from '../../shared/ui/page-error';
 
 const TaskDetailsPage = () => {
     const { id } = useParams<{ id: string }>();

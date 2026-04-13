@@ -1,3 +1,4 @@
+import { useUpdateTaskStatusMutation } from '@entities/api/api';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Chip from '@mui/material/Chip';
@@ -13,7 +14,6 @@ import TaskCardActions from './task-card-actions';
 import TaskCardDescription from './task-card-description';
 import TaskCardHeader from './task-card-header';
 import TaskTags from './task-tags';
-import { useUpdateTaskStatusMutation } from '../../api/api';
 import { isTaskOverdue } from '../lib/is-task-overdue';
 import { PRIORITY_COLORS, PRIORITY_LABELS } from '../model/constants';
 import type { Task, TaskStatus } from '../model/types';

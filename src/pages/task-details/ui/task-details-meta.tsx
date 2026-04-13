@@ -1,15 +1,14 @@
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import dayjs from 'dayjs';
-
 import {
     PRIORITY_COLORS,
     PRIORITY_LABELS,
     STATUS_COLORS,
     STATUS_LABELS,
-} from '../../../entities/task/model/constants';
-import type { Task } from '../../../entities/task/model/types';
+} from '@entities/task/model/constants';
+import type { Task } from '@entities/task/model/types';
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import dayjs from 'dayjs';
 
 interface TaskDetailsMetaProps {
     isOverdue: boolean;

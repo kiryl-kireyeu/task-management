@@ -1,13 +1,13 @@
+import { useGetTasksQuery } from '@entities/api/api';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
+import Loader from '@shared/ui/loader';
 
 import { TASKS_PER_PAGE, useTasksSearchParams } from './model/use-tasks-search-params';
 import TaskPageControls from './ui/task-page-controls';
 import TaskPageHeader from './ui/task-page-header';
 import TaskPageList from './ui/task-page-list';
 import TaskPagePagination from './ui/task-page-pagination';
-import { useGetTasksQuery } from '../../entities/api/api';
-import Loader from '../../shared/ui/loader';
 
 const TasksPage = () => {
     const {
