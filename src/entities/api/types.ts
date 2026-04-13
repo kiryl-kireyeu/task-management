@@ -1,26 +1,8 @@
-export type TaskStatus = 'todo' | 'inProgress' | 'done';
-
-export type TaskPriority = 'low' | 'medium' | 'high';
+import type { TaskPriority, TaskStatus } from '../task/model/types';
 
 export type TasksSortBy = 'createdAt' | 'deadline';
 
 export type SortOrder = 'asc' | 'desc';
-
-export interface Task {
-    id: string;
-    title: string;
-    description?: string;
-    status: TaskStatus;
-    priority: TaskPriority;
-    deadline: string;
-    tags: string[];
-    createdAt: string;
-    updatedAt: string;
-}
-
-export type CreateTaskPayload = Omit<Task, 'id' | 'createdAt' | 'updatedAt'>;
-
-export type UpdateTaskPayload = Partial<CreateTaskPayload>;
 
 export interface GetTasksParams {
     status?: TaskStatus;
