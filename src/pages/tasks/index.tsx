@@ -20,11 +20,19 @@ const TasksPage = () => {
         handleTagClick,
     } = useTasksSearchParams();
 
-    const { data: tasks = [], isLoading, isError } = useGetTasksQuery(filters);
+    const {
+        data: tasksResponse,
+        isLoading,
+        isError,
+    } = useGetTasksQuery({
+        ...filters,
+        page,
+        perPage: TASKS_PER_PAGE,
+    });
 
-    const totalPages = Math.max(1, Math.ceil(tasks.length / TASKS_PER_PAGE));
+    const totalPages = Math.max(1, tasksResponse?.pages ?? 1);
     const safePage = Math.min(page, totalPages);
-    const paginatedTasks = tasks.slice((safePage - 1) * TASKS_PER_PAGE, safePage * TASKS_PER_PAGE);
+    const tasks = tasksResponse?.data ?? [];
 
     if (isLoading) {
         return <Loader />;
@@ -47,7 +55,7 @@ const TasksPage = () => {
                 sortValue={sortValue}
             />
 
-            <TaskPageList onTagClick={handleTagClick} tasks={paginatedTasks} />
+            <TaskPageList onTagClick={handleTagClick} tasks={tasks} />
 
             <TaskPagePagination count={totalPages} onChange={handlePageChange} page={safePage} />
         </Stack>

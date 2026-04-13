@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-import type { CreateTagPayload, GetTasksParams, Tag } from './types';
+import type { CreateTagPayload, GetTasksParams, PaginatedResponse, Tag } from './types';
 import type { CreateTaskPayload, Task, UpdateTaskPayload } from '../task/model/types';
 
 export const entitiesApi = createApi({
@@ -8,9 +8,17 @@ export const entitiesApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:3001' }),
     tagTypes: ['Task', 'Tag'],
     endpoints: (builder) => ({
-        getTasks: builder.query<Task[], GetTasksParams | void>({
+        getTasks: builder.query<PaginatedResponse<Task>, GetTasksParams | void>({
             query: (queryParams) => {
                 const params: Record<string, string> = {};
+
+                if (queryParams?.page) {
+                    params._page = String(queryParams.page);
+                }
+
+                if (queryParams?.perPage) {
+                    params._per_page = String(queryParams.perPage);
+                }
 
                 if (queryParams?.status) {
                     params.status = queryParams.status;
@@ -29,11 +37,10 @@ export const entitiesApi = createApi({
                 }
 
                 if (queryParams?.sortBy) {
-                    params._sort = queryParams.sortBy;
-                }
-
-                if (queryParams?.sortOrder) {
-                    params._order = queryParams.sortOrder;
+                    params._sort =
+                        queryParams.sortOrder === 'desc'
+                            ? `-${queryParams.sortBy}`
+                            : queryParams.sortBy;
                 }
 
                 return { url: '/tasks', params };
@@ -41,7 +48,7 @@ export const entitiesApi = createApi({
             providesTags: (result) =>
                 result
                     ? [
-                          ...result.map((task) => ({ type: 'Task' as const, id: task.id })),
+                          ...result.data.map((task) => ({ type: 'Task' as const, id: task.id })),
                           { type: 'Task' as const, id: 'LIST' },
                       ]
                     : [{ type: 'Task' as const, id: 'LIST' }],
@@ -87,7 +94,7 @@ export const entitiesApi = createApi({
                                 'getTasks',
                                 entry.originalArgs,
                                 (draft) => {
-                                    const task = draft.find((item) => item.id === id);
+                                    const task = draft.data.find((item) => item.id === id);
 
                                     if (task) {
                                         task.status = status;

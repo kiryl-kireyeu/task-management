@@ -26,7 +26,7 @@
             "id": "task-3",
             "title": "Add task status update",
             "description": "Support changing task status directly from the list without reloading the whole page.",
-            "status": "done",
+            "status": "todo",
             "priority": "low",
             "deadline": "2026-04-12",
             "tags": ["frontend", "rtk-query"],
@@ -55,5 +55,6 @@
             "id": "tag-5",
             "name": "rtk-query"
         }
-    ]
+    ],
+    "$schema": "./node_modules/json-server/schema.json"
 }
