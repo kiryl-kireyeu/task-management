@@ -27,7 +27,7 @@ const PageShell = ({
     onBack,
 }: PageShellProps) => {
     return (
-        <Container maxWidth={maxWidth} sx={{ py: 4 }}>
+        <Container maxWidth={maxWidth} sx={{ pb: 4 }}>
             <Button startIcon={<ArrowBackIcon />} onClick={onBack} sx={{ mb: 2 }}>
                 {backButtonText}
             </Button>
