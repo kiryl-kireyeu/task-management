@@ -38,7 +38,7 @@ const TaskForm = ({
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3}>
-                <TaskFormFields control={control} errors={errors} />
+                <TaskFormFields control={control} errors={errors} isSubmitting={isSubmitting} />
 
                 <Button
                     fullWidth

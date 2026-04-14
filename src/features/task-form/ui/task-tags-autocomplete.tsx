@@ -10,15 +10,17 @@ const filter = createFilterOptions<string>();
 
 interface TaskTagsAutocompleteProps {
     error?: boolean;
-    helperText?: string;
     value: string[];
+    disabled?: boolean;
+    helperText?: string;
     onChange: (value: string[]) => void;
 }
 
 const TaskTagsAutocomplete = ({
     error = false,
-    helperText,
     value,
+    disabled = false,
+    helperText,
     onChange,
 }: TaskTagsAutocompleteProps) => {
     const [inputValue, setInputValue] = useState('');
@@ -69,13 +71,15 @@ const TaskTagsAutocomplete = ({
 
     return (
         <Autocomplete<string, true, false, true>
-            multiple
-            freeSolo
-            filterSelectedOptions
-            inputValue={inputValue}
-            loading={isFetching}
-            options={options}
             value={value}
+            options={options}
+            loading={isFetching}
+            freeSolo
+            disabled={disabled}
+            multiple
+            inputValue={inputValue}
+            slotProps={{ chip: { variant: 'outlined' } }}
+            filterSelectedOptions
             onChange={(event, newValue) => {
                 void handleChange(event, newValue);
             }}
@@ -121,9 +125,6 @@ const TaskTagsAutocomplete = ({
                     }}
                 />
             )}
-            slotProps={{
-                chip: { variant: 'outlined' },
-            }}
         />
     );
 };

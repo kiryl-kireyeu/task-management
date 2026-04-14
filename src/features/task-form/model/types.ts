@@ -15,4 +15,5 @@ export interface TaskFormProps {
 export interface TaskFormFieldsProps {
     control: Control<TaskFormValues>;
     errors: FieldErrors<TaskFormValues>;
+    isSubmitting?: boolean;
 }

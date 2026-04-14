@@ -6,21 +6,22 @@ import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
 import Select from '@mui/material/Select';
-import TextField from '@mui/material/TextField';
 import { Controller } from 'react-hook-form';
+import TextField from '@mui/material/TextField';
+import RadioGroup from '@mui/material/RadioGroup';
 
 import TaskTagsAutocomplete from './task-tags-autocomplete';
 import { TASK_FORM_PRIORITY_OPTIONS, TASK_FORM_STATUS_OPTIONS } from '../model/constants';
 import type { TaskFormFieldsProps } from '../model/types';
 
-const TaskFormFields = ({ control, errors }: TaskFormFieldsProps) => {
+const TaskFormFields = ({ control, errors, isSubmitting }: TaskFormFieldsProps) => {
     return (
         <>
             <Controller
                 name="title"
                 control={control}
+                disabled={isSubmitting}
                 render={({ field }) => (
                     <TextField
                         {...field}
@@ -35,6 +36,7 @@ const TaskFormFields = ({ control, errors }: TaskFormFieldsProps) => {
             <Controller
                 name="description"
                 control={control}
+                disabled={isSubmitting}
                 render={({ field }) => (
                     <TextField
                         {...field}
@@ -54,6 +56,7 @@ const TaskFormFields = ({ control, errors }: TaskFormFieldsProps) => {
             <Controller
                 name="status"
                 control={control}
+                disabled={isSubmitting}
                 render={({ field }) => (
                     <FormControl fullWidth error={!!errors.status}>
                         <InputLabel id="task-status-label">Статус</InputLabel>
@@ -72,6 +75,7 @@ const TaskFormFields = ({ control, errors }: TaskFormFieldsProps) => {
             <Controller
                 name="priority"
                 control={control}
+                disabled={isSubmitting}
                 render={({ field }) => (
                     <FormControl error={!!errors.priority}>
                         <FormLabel id="task-priority-label">Приоритет</FormLabel>
@@ -93,6 +97,7 @@ const TaskFormFields = ({ control, errors }: TaskFormFieldsProps) => {
             <Controller
                 name="deadline"
                 control={control}
+                disabled={isSubmitting}
                 render={({ field }) => (
                     <TextField
                         {...field}
@@ -109,12 +114,14 @@ const TaskFormFields = ({ control, errors }: TaskFormFieldsProps) => {
             <Controller
                 name="tags"
                 control={control}
+                disabled={isSubmitting}
                 render={({ field }) => (
                     <TaskTagsAutocomplete
                         error={!!errors.tags}
+                        value={field.value}
+                        disabled={field.disabled}
                         helperText={errors.tags?.message}
                         onChange={field.onChange}
-                        value={field.value}
                     />
                 )}
             />
