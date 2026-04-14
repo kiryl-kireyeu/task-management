@@ -30,8 +30,8 @@ const TaskDetailsPage = () => {
         }
 
         await deleteTask(id).unwrap();
-        setDeleteOpen(false);
         navigate('/');
+        setDeleteOpen(false);
     };
 
     if (!id) {

@@ -84,10 +84,7 @@ export const entitiesApi = createApi({
         }),
         deleteTask: builder.mutation<void, string>({
             query: (id) => ({ url: `/tasks/${id}`, method: 'DELETE' }),
-            invalidatesTags: (_result, _error, id) => [
-                { type: 'Task', id },
-                { type: 'Task', id: 'LIST' },
-            ],
+            invalidatesTags: [{ type: 'Task', id: 'LIST' }],
         }),
         updateTaskStatus: builder.mutation<Task, { id: string; status: Task['status'] }>({
             query: ({ id, status }) => ({
