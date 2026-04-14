@@ -69,10 +69,7 @@ const TaskCard = ({ task, onTagClick }: TaskCardProps) => {
                 <TaskCardDescription description={task.description} />
 
                 <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 1 }}>
-                    <Typography
-                        color={isOverdue ? 'error.main' : 'text.secondary'}
-                        variant="caption"
-                    >
+                    <Typography color={isOverdue ? 'error' : 'text'} variant="caption">
                         Дедлайн: {dayjs(task.deadline).format('DD.MM.YYYY')}
                     </Typography>
                     {isOverdue ? (

@@ -14,10 +14,10 @@ const TaskCardHeader = ({ title, label, color }: TaskCardHeaderProps) => {
             direction="row"
             sx={{ justifyContent: 'space-between', alignItems: 'flex-start', mb: 1 }}
         >
-            <Typography component="div" sx={{ fontWeight: 600, flex: 1, mr: 1 }} variant="h6">
+            <Typography component="div" sx={{ fontWeight: 600, flex: 1, mr: 1 }} variant="h4">
                 {title}
             </Typography>
-            <Chip color={color} label={label} size="small" />
+            <Chip color={color} label={label} variant="outlined" size="small" />
         </Stack>
     );
 };
