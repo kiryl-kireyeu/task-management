@@ -9,6 +9,7 @@
         "server": "json-server -w server/db.json -p 3001",
         "build": "tsc -b && vite build",
         "lint": "eslint .",
+        "lint:fix": "eslint . --fix",
         "preview": "vite preview",
         "format": "prettier --write .",
         "test": "vitest",
