@@ -1,3 +1,5 @@
+import { useGetTagsQuery } from '@entities/api/api';
+import type { GetTasksParams } from '@entities/api/types';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -9,9 +11,6 @@ import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
-
-import { useGetTagsQuery } from '../../../entities/api/api';
-import type { GetTasksParams } from '../../../entities/api/types';
 
 interface TaskPageControlsProps {
     filters: GetTasksParams;

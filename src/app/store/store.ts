@@ -1,6 +1,5 @@
+import { entitiesApi } from '@entities/api/api';
 import { configureStore } from '@reduxjs/toolkit';
-
-import { entitiesApi } from '../../entities/api/api';
 
 // Store is kept minimal and will host RTK Query state later.
 export const store = configureStore({

@@ -1,8 +1,7 @@
 import Add from '@mui/icons-material/Add';
 import { Box, Button } from '@mui/material';
+import PageTitle from '@shared/ui/page-title';
 import { Link as RouterLink } from 'react-router-dom';
-
-import PageTitle from '../../../shared/ui/page-title';
 
 const TaskPageHeader = () => {
     return (

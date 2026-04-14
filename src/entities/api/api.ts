@@ -1,7 +1,7 @@
+import type { CreateTaskPayload, Task, UpdateTaskPayload } from '@entities/task/model/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 import type { CreateTagPayload, GetTasksParams, PaginatedResponse, Tag } from './types';
-import type { CreateTaskPayload, Task, UpdateTaskPayload } from '../task/model/types';
 
 export const entitiesApi = createApi({
     reducerPath: 'entitiesApi',

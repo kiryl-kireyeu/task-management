@@ -1,10 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './layouts/root-layout';
-import CreateTaskPage from '../../pages/create-task';
-import EditTaskPage from '../../pages/edit-task';
-import TaskDetailsPage from '../../pages/task-details';
-import TasksPage from '../../pages/tasks';
 
 const router = createBrowserRouter([
     {
@@ -13,19 +9,35 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <TasksPage />,
+                lazy: async () => {
+                    const { default: Component } = await import('@pages/tasks');
+
+                    return { Component };
+                },
             },
             {
                 path: 'task/:id',
-                element: <TaskDetailsPage />,
+                lazy: async () => {
+                    const { default: Component } = await import('@pages/task-details');
+
+                    return { Component };
+                },
             },
             {
                 path: 'create',
-                element: <CreateTaskPage />,
+                lazy: async () => {
+                    const { default: Component } = await import('@pages/create-task');
+
+                    return { Component };
+                },
             },
             {
                 path: 'edit/:id',
-                element: <EditTaskPage />,
+                lazy: async () => {
+                    const { default: Component } = await import('@pages/edit-task');
+
+                    return { Component };
+                },
             },
         ],
     },
