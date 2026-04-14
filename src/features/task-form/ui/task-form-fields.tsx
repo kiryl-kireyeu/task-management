@@ -1,5 +1,4 @@
 import { PRIORITY_LABELS, STATUS_LABELS } from '@entities/task/model/constants';
-import Autocomplete from '@mui/material/Autocomplete';
 import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -12,10 +11,11 @@ import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import { Controller } from 'react-hook-form';
 
+import TaskTagsAutocomplete from './task-tags-autocomplete';
 import { TASK_FORM_PRIORITY_OPTIONS, TASK_FORM_STATUS_OPTIONS } from '../model/constants';
 import type { TaskFormFieldsProps } from '../model/types';
 
-const TaskFormFields = ({ control, errors, tagOptions }: TaskFormFieldsProps) => {
+const TaskFormFields = ({ control, errors }: TaskFormFieldsProps) => {
     return (
         <>
             <Controller
@@ -110,23 +110,11 @@ const TaskFormFields = ({ control, errors, tagOptions }: TaskFormFieldsProps) =>
                 name="tags"
                 control={control}
                 render={({ field }) => (
-                    <Autocomplete<string, true, false, true>
-                        multiple
-                        freeSolo
-                        options={tagOptions}
+                    <TaskTagsAutocomplete
+                        error={!!errors.tags}
+                        helperText={errors.tags?.message}
+                        onChange={field.onChange}
                         value={field.value}
-                        onChange={(_event, value) => field.onChange(value)}
-                        renderInput={(params) => (
-                            <TextField
-                                {...params}
-                                error={!!errors.tags}
-                                helperText={errors.tags?.message}
-                                label="Теги"
-                            />
-                        )}
-                        slotProps={{
-                            chip: { variant: 'outlined' },
-                        }}
                     />
                 )}
             />

@@ -5,14 +5,14 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import TaskFormFields from './task-form-fields';
+import { TASK_FORM_DEFAULT_VALUES } from '../model/constants';
 import { taskSchema } from '../model/schema';
-import { TASK_FORM_DEFAULT_VALUES, type TaskFormProps, type TaskFormValues } from '../model/types';
+import type { TaskFormProps, TaskFormValues } from '../model/types';
 
 const TaskForm = ({
     defaultValues,
     isSubmitting = false,
     submitButtonText = 'Сохранить',
-    tagOptions,
     onSubmit,
 }: TaskFormProps) => {
     const {
@@ -38,7 +38,7 @@ const TaskForm = ({
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Stack spacing={3}>
-                <TaskFormFields control={control} errors={errors} tagOptions={tagOptions} />
+                <TaskFormFields control={control} errors={errors} />
 
                 <Button
                     fullWidth
