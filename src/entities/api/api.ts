@@ -123,6 +123,21 @@ export const entitiesApi = createApi({
                       ]
                     : [{ type: 'Tag' as const, id: 'LIST' }],
         }),
+        searchTags: builder.query<Tag[], string>({
+            query: (search) => ({
+                url: '/tags',
+                params: {
+                    name_like: search,
+                },
+            }),
+            providesTags: (result) =>
+                result
+                    ? [
+                          ...result.map((tag) => ({ type: 'Tag' as const, id: tag.id })),
+                          { type: 'Tag' as const, id: 'LIST' },
+                      ]
+                    : [{ type: 'Tag' as const, id: 'LIST' }],
+        }),
         createTag: builder.mutation<Tag, CreateTagPayload>({
             query: (body) => ({ url: '/tags', method: 'POST', body }),
             invalidatesTags: [{ type: 'Tag', id: 'LIST' }],
@@ -138,5 +153,6 @@ export const {
     useDeleteTaskMutation,
     useUpdateTaskStatusMutation,
     useGetTagsQuery,
+    useSearchTagsQuery,
     useCreateTagMutation,
 } = entitiesApi;
