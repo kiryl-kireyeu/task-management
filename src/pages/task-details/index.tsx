@@ -30,8 +30,8 @@ const TaskDetailsPage = () => {
         }
 
         await deleteTask(id).unwrap();
-        setDeleteOpen(false);
         navigate('/');
+        setDeleteOpen(false);
     };
 
     if (!id) {
@@ -61,7 +61,7 @@ const TaskDetailsPage = () => {
     const isOverdue = isTaskOverdue(task);
 
     return (
-        <Container maxWidth="md" sx={{ py: 4 }}>
+        <Container maxWidth="md" sx={{ pb: 4 }}>
             <Button startIcon={<ArrowBackIcon />} onClick={() => navigate('/')} sx={{ mb: 2 }}>
                 К списку задач
             </Button>

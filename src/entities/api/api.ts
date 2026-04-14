@@ -1,5 +1,6 @@
 import type { CreateTaskPayload, Task, UpdateTaskPayload } from '@entities/task/model/types';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { getNowIso } from '@shared/lib/date/get-now-iso';
 
 import type { CreateTagPayload, GetTasksParams, PaginatedResponse, Tag } from './types';
 
@@ -58,19 +59,32 @@ export const entitiesApi = createApi({
             providesTags: (_result, _error, id) => [{ type: 'Task', id }],
         }),
         createTask: builder.mutation<Task, CreateTaskPayload>({
-            query: (body) => ({ url: '/tasks', method: 'POST', body }),
+            query: (payload) => {
+                const now = getNowIso();
+                const body = {
+                    ...payload,
+                    createdAt: now,
+                    updatedAt: now,
+                };
+
+                return { url: '/tasks', method: 'POST', body };
+            },
             invalidatesTags: [{ type: 'Task', id: 'LIST' }],
         }),
         updateTask: builder.mutation<Task, { id: string; data: UpdateTaskPayload }>({
-            query: ({ id, data }) => ({ url: `/tasks/${id}`, method: 'PATCH', body: data }),
+            query: ({ id, data }) => ({
+                url: `/tasks/${id}`,
+                method: 'PATCH',
+                body: {
+                    ...data,
+                    updatedAt: getNowIso(),
+                },
+            }),
             invalidatesTags: (_result, _error, { id }) => [{ type: 'Task', id }],
         }),
         deleteTask: builder.mutation<void, string>({
             query: (id) => ({ url: `/tasks/${id}`, method: 'DELETE' }),
-            invalidatesTags: (_result, _error, id) => [
-                { type: 'Task', id },
-                { type: 'Task', id: 'LIST' },
-            ],
+            invalidatesTags: [{ type: 'Task', id: 'LIST' }],
         }),
         updateTaskStatus: builder.mutation<Task, { id: string; status: Task['status'] }>({
             query: ({ id, status }) => ({
@@ -123,6 +137,21 @@ export const entitiesApi = createApi({
                       ]
                     : [{ type: 'Tag' as const, id: 'LIST' }],
         }),
+        searchTags: builder.query<Tag[], string>({
+            query: (search) => ({
+                url: '/tags',
+                params: {
+                    'name:contains': search,
+                },
+            }),
+            providesTags: (result) =>
+                result
+                    ? [
+                          ...result.map((tag) => ({ type: 'Tag' as const, id: tag.id })),
+                          { type: 'Tag' as const, id: 'LIST' },
+                      ]
+                    : [{ type: 'Tag' as const, id: 'LIST' }],
+        }),
         createTag: builder.mutation<Tag, CreateTagPayload>({
             query: (body) => ({ url: '/tags', method: 'POST', body }),
             invalidatesTags: [{ type: 'Tag', id: 'LIST' }],
@@ -138,5 +167,6 @@ export const {
     useDeleteTaskMutation,
     useUpdateTaskStatusMutation,
     useGetTagsQuery,
+    useSearchTagsQuery,
     useCreateTagMutation,
 } = entitiesApi;

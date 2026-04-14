@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 
 import type { GetTasksParams, SortOrder, TasksSortBy } from '../../../entities/api/types';
 
-export const TASKS_PER_PAGE = 10;
+export const TASKS_PER_PAGE = 5;
 
 export const useTasksSearchParams = () => {
     const [searchParams, setSearchParams] = useSearchParams();
