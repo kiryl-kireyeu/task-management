@@ -1,19 +1,16 @@
 import { useUpdateTaskStatusMutation } from '@entities/api/api';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import Chip from '@mui/material/Chip';
 import type { SelectChangeEvent } from '@mui/material/Select';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import dayjs from 'dayjs';
+import { alpha } from '@mui/material/styles';
 import type { MouseEvent } from 'react';
 import { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import TaskCardActions from './task-card-actions';
+import TaskCardDeadline from './task-card-deadline';
 import TaskCardDescription from './task-card-description';
+import TaskCardFooter from './task-card-footer';
 import TaskCardHeader from './task-card-header';
-import TaskTags from './task-tags';
 import { isTaskOverdue } from '../lib/is-task-overdue';
 import { PRIORITY_COLORS, PRIORITY_LABELS } from '../model/constants';
 import type { Task, TaskStatus } from '../model/types';
@@ -51,14 +48,14 @@ const TaskCard = ({ task, onTagClick }: TaskCardProps) => {
     return (
         <Card
             onClick={handleCardClick}
-            sx={{
+            sx={(theme) => ({
                 cursor: 'pointer',
                 borderLeft: 4,
                 borderColor: isOverdue ? 'error.main' : 'primary.main',
-                bgcolor: isOverdue ? 'error.50' : 'background.paper',
+                bgcolor: isOverdue ? alpha(theme.palette.error.main, 0.06) : 'background.paper',
                 transition: 'box-shadow 0.2s, transform 0.2s',
                 '&:hover': { boxShadow: 6, transform: 'translateY(-2px)' },
-            }}
+            })}
         >
             <CardContent>
                 <TaskCardHeader
@@ -67,19 +64,14 @@ const TaskCard = ({ task, onTagClick }: TaskCardProps) => {
                     title={task.title}
                 />
                 <TaskCardDescription description={task.description} />
-
-                <Stack direction="row" spacing={1} sx={{ alignItems: 'center', mb: 1 }}>
-                    <Typography color={isOverdue ? 'error' : 'text'} variant="caption">
-                        Дедлайн: {dayjs(task.deadline).format('DD.MM.YYYY')}
-                    </Typography>
-                    {isOverdue ? (
-                        <Chip color="error" label="Просрочено" size="small" variant="outlined" />
-                    ) : null}
-                </Stack>
-
-                <TaskTags onTagClick={handleTagClick} tags={task.tags} />
+                <TaskCardDeadline deadline={task.deadline} isOverdue={isOverdue} />
+                <TaskCardFooter
+                    onStatusChange={handleStatusChange}
+                    onTagClick={handleTagClick}
+                    status={task.status}
+                    tags={task.tags}
+                />
             </CardContent>
-            <TaskCardActions onStatusChange={handleStatusChange} status={task.status} />
         </Card>
     );
 };

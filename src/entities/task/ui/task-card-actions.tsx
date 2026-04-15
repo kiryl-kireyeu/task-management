@@ -1,4 +1,3 @@
-import CardActions from '@mui/material/CardActions';
 import Chip from '@mui/material/Chip';
 import MenuItem from '@mui/material/MenuItem';
 import Select, { type SelectChangeEvent } from '@mui/material/Select';
@@ -13,25 +12,23 @@ interface TaskCardActionsProps {
 
 const TaskCardActions = ({ status, onStatusChange }: TaskCardActionsProps) => {
     return (
-        <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-            <Select
-                onChange={onStatusChange}
-                onClick={(event) => event.stopPropagation()}
-                size="small"
-                sx={{ minWidth: 150 }}
-                value={status}
-            >
-                {(Object.keys(STATUS_LABELS) as TaskStatus[]).map((currentStatus) => (
-                    <MenuItem key={currentStatus} value={currentStatus}>
-                        <Chip
-                            color={STATUS_COLORS[currentStatus]}
-                            label={STATUS_LABELS[currentStatus]}
-                            size="small"
-                        />
-                    </MenuItem>
-                ))}
-            </Select>
-        </CardActions>
+        <Select
+            onChange={onStatusChange}
+            onClick={(event) => event.stopPropagation()}
+            size="small"
+            sx={{ minWidth: 150 }}
+            value={status}
+        >
+            {(Object.keys(STATUS_LABELS) as TaskStatus[]).map((currentStatus) => (
+                <MenuItem key={currentStatus} value={currentStatus}>
+                    <Chip
+                        color={STATUS_COLORS[currentStatus]}
+                        label={STATUS_LABELS[currentStatus]}
+                        size="small"
+                    />
+                </MenuItem>
+            ))}
+        </Select>
     );
 };
 
