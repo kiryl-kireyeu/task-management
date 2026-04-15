@@ -13,7 +13,7 @@ interface TaskCardActionsProps {
 
 const TaskCardActions = ({ status, onStatusChange }: TaskCardActionsProps) => {
     return (
-        <CardActions>
+        <CardActions sx={{ display: 'flex', justifyContent: 'flex-end' }}>
             <Select
                 onChange={onStatusChange}
                 onClick={(event) => event.stopPropagation()}
