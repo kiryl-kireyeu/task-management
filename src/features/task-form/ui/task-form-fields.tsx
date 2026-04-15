@@ -3,12 +3,10 @@ import FormControl from '@mui/material/FormControl';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormLabel from '@mui/material/FormLabel';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
-import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
+import Select from '@shared/ui/select';
 import { Controller } from 'react-hook-form';
 
 import TaskTagsAutocomplete from './task-tags-autocomplete';
@@ -58,17 +56,20 @@ const TaskFormFields = ({ control, errors, isSubmitting }: TaskFormFieldsProps) 
                 control={control}
                 disabled={isSubmitting}
                 render={({ field }) => (
-                    <FormControl fullWidth error={!!errors.status}>
-                        <InputLabel id="task-status-label">Статус</InputLabel>
-                        <Select {...field} label="Статус" labelId="task-status-label">
-                            {TASK_FORM_STATUS_OPTIONS.map((status) => (
-                                <MenuItem key={status} value={status}>
-                                    {STATUS_LABELS[status]}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                        <FormHelperText>{errors.status?.message}</FormHelperText>
-                    </FormControl>
+                    <Select
+                        disabled={field.disabled}
+                        error={!!errors.status}
+                        fullWidth
+                        helperText={errors.status?.message}
+                        label="Статус"
+                        name={field.name}
+                        onChange={field.onChange}
+                        options={TASK_FORM_STATUS_OPTIONS.map((status) => ({
+                            label: STATUS_LABELS[status],
+                            value: status,
+                        }))}
+                        value={field.value}
+                    />
                 )}
             />
 
