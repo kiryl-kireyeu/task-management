@@ -1,60 +1,83 @@
 {
-    "tasks": [
-        {
-            "id": "task-1",
-            "title": "Prepare task list page",
-            "description": "Create the first version of the tasks list with loading, error, and empty states.",
-            "status": "inProgress",
-            "priority": "high",
-            "deadline": "2026-04-18",
-            "tags": ["frontend", "ui"],
-            "createdAt": "2026-04-10T09:00:00.000Z",
-            "updatedAt": "2026-04-11T13:30:00.000Z"
-        },
-        {
-            "id": "task-2",
-            "title": "Configure task form validation",
-            "description": "Add react-hook-form and zod schema validation for create and edit task pages.",
-            "status": "todo",
-            "priority": "medium",
-            "deadline": "2026-04-20",
-            "tags": ["forms", "validation"],
-            "createdAt": "2026-04-09T11:15:00.000Z",
-            "updatedAt": "2026-04-09T11:15:00.000Z"
-        },
-        {
-            "id": "task-3",
-            "title": "Add task status update",
-            "description": "Support changing task status directly from the list without reloading the whole page.",
-            "status": "todo",
-            "priority": "low",
-            "deadline": "2026-04-12",
-            "tags": ["frontend", "rtk-query"],
-            "createdAt": "2026-04-08T08:45:00.000Z",
-            "updatedAt": "2026-04-12T07:20:00.000Z"
-        }
-    ],
-    "tags": [
-        {
-            "id": "tag-1",
-            "name": "frontend"
-        },
-        {
-            "id": "tag-2",
-            "name": "ui"
-        },
-        {
-            "id": "tag-3",
-            "name": "forms"
-        },
-        {
-            "id": "tag-4",
-            "name": "validation"
-        },
-        {
-            "id": "tag-5",
-            "name": "rtk-query"
-        }
-    ],
-    "$schema": "./node_modules/json-server/schema.json"
+  "tasks": [
+    {
+      "title": "Test-1",
+      "status": "todo",
+      "priority": "medium",
+      "deadline": "2026-04-15",
+      "tags": [
+        "React",
+        "RTK Query",
+        "Free"
+      ],
+      "createdAt": "2026-04-15T10:21:05.519Z",
+      "updatedAt": "2026-04-15T10:21:05.519Z",
+      "id": "1YPwsmvDv0s"
+    },
+    {
+      "title": "Test-2",
+      "status": "todo",
+      "priority": "high",
+      "deadline": "2026-04-16",
+      "tags": [
+        "Backend",
+        "Java",
+        "OOP"
+      ],
+      "createdAt": "2026-04-15T10:21:51.296Z",
+      "updatedAt": "2026-04-15T10:21:51.296Z",
+      "id": "Mjk0jL1-G1U"
+    },
+    {
+      "title": "Task-3",
+      "status": "todo",
+      "priority": "medium",
+      "deadline": "2026-04-18",
+      "tags": [
+        "React"
+      ],
+      "createdAt": "2026-04-15T10:22:08.984Z",
+      "updatedAt": "2026-04-15T10:22:08.984Z",
+      "id": "AiRHlEafwhg"
+    },
+    {
+      "title": "Task - 4",
+      "status": "todo",
+      "priority": "low",
+      "deadline": "2026-04-22",
+      "tags": [
+        "RTK Query"
+      ],
+      "createdAt": "2026-04-15T10:22:45.617Z",
+      "updatedAt": "2026-04-15T10:22:45.617Z",
+      "id": "HXQCVbhWiuA"
+    }
+  ],
+  "tags": [
+    {
+      "name": "React",
+      "id": "Al6U7c7qQMA"
+    },
+    {
+      "name": "RTK Query",
+      "id": "-qbnLnJT784"
+    },
+    {
+      "name": "Free",
+      "id": "VIcZS2e0eqc"
+    },
+    {
+      "name": "Backend",
+      "id": "x2LsmJcrubo"
+    },
+    {
+      "name": "Java",
+      "id": "XzLmByNZn0s"
+    },
+    {
+      "name": "OOP",
+      "id": "J2A6f11BLMQ"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
