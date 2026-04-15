@@ -1,3 +1,5 @@
+import ErrorPage from '@pages/error';
+import PageNotFound from '@pages/page-not-found';
 import { createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './layouts/root-layout';
@@ -6,6 +8,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <RootLayout />,
+        errorElement: <ErrorPage />,
         children: [
             {
                 index: true,
@@ -38,6 +41,10 @@ const router = createBrowserRouter([
 
                     return { Component };
                 },
+            },
+            {
+                path: '*',
+                element: <PageNotFound />,
             },
         ],
     },
