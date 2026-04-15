@@ -5,12 +5,9 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Box from '@mui/material/Box';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import Select from '@mui/material/Select';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import Select from '@shared/ui/select';
 
 interface TaskPageControlsProps {
     filters: GetTasksParams;
@@ -46,52 +43,46 @@ const TaskPageControlsForm = ({
                 alignItems: 'end',
             }}
         >
-            <FormControl fullWidth>
-                <InputLabel id="status-filter-label">Status</InputLabel>
-                <Select
-                    label="Status"
-                    labelId="status-filter-label"
-                    onChange={(event) => onStatusChange(event.target.value)}
-                    value={filters.status ?? ''}
-                >
-                    <MenuItem value="">All statuses</MenuItem>
-                    <MenuItem value="todo">To do</MenuItem>
-                    <MenuItem value="inProgress">In progress</MenuItem>
-                    <MenuItem value="done">Done</MenuItem>
-                </Select>
-            </FormControl>
+            <Select
+                fullWidth
+                label="Status"
+                emptyOptionLabel="All statuses"
+                name="status"
+                onChange={onStatusChange}
+                options={[
+                    { label: 'To do', value: 'todo' },
+                    { label: 'In progress', value: 'inProgress' },
+                    { label: 'Done', value: 'done' },
+                ]}
+                value={filters.status ?? ''}
+            />
 
-            <FormControl fullWidth>
-                <InputLabel id="priority-filter-label">Priority</InputLabel>
-                <Select
-                    label="Priority"
-                    labelId="priority-filter-label"
-                    onChange={(event) => onPriorityChange(event.target.value)}
-                    value={filters.priority ?? ''}
-                >
-                    <MenuItem value="">All priorities</MenuItem>
-                    <MenuItem value="low">Low</MenuItem>
-                    <MenuItem value="medium">Medium</MenuItem>
-                    <MenuItem value="high">High</MenuItem>
-                </Select>
-            </FormControl>
+            <Select
+                fullWidth
+                label="Priority"
+                emptyOptionLabel="All priorities"
+                name="priority"
+                onChange={onPriorityChange}
+                options={[
+                    { label: 'Low', value: 'low' },
+                    { label: 'Medium', value: 'medium' },
+                    { label: 'High', value: 'high' },
+                ]}
+                value={filters.priority ?? ''}
+            />
 
-            <FormControl fullWidth>
-                <InputLabel id="tag-filter-label">Tag</InputLabel>
-                <Select
-                    label="Tag"
-                    labelId="tag-filter-label"
-                    onChange={(event) => onTagChange(event.target.value)}
-                    value={filters.tag ?? ''}
-                >
-                    <MenuItem value="">All tags</MenuItem>
-                    {tags.map((tag) => (
-                        <MenuItem key={tag.id} value={tag.name}>
-                            {tag.name}
-                        </MenuItem>
-                    ))}
-                </Select>
-            </FormControl>
+            <Select
+                fullWidth
+                label="Tag"
+                emptyOptionLabel="All tags"
+                name="tag"
+                onChange={onTagChange}
+                options={tags.map((tag) => ({
+                    label: tag.name,
+                    value: tag.name,
+                }))}
+                value={filters.tag ?? ''}
+            />
 
             <TextField
                 fullWidth
@@ -101,20 +92,19 @@ const TaskPageControlsForm = ({
                 value={filters.search ?? ''}
             />
 
-            <FormControl fullWidth>
-                <InputLabel id="sort-by-label">Sort by</InputLabel>
-                <Select
-                    label="Sort by"
-                    labelId="sort-by-label"
-                    onChange={(event) => onSortChange(event.target.value)}
-                    value={sortValue}
-                >
-                    <MenuItem value="createdAt-desc">Created date: newest first</MenuItem>
-                    <MenuItem value="createdAt-asc">Created date: oldest first</MenuItem>
-                    <MenuItem value="deadline-asc">Deadline: nearest first</MenuItem>
-                    <MenuItem value="deadline-desc">Deadline: latest first</MenuItem>
-                </Select>
-            </FormControl>
+            <Select
+                fullWidth
+                label="Sort by"
+                name="sort"
+                onChange={onSortChange}
+                options={[
+                    { label: 'Created date: newest first', value: 'createdAt-desc' },
+                    { label: 'Created date: oldest first', value: 'createdAt-asc' },
+                    { label: 'Deadline: nearest first', value: 'deadline-asc' },
+                    { label: 'Deadline: latest first', value: 'deadline-desc' },
+                ]}
+                value={sortValue}
+            />
         </Box>
     );
 };
