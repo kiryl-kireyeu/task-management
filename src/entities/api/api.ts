@@ -2,7 +2,21 @@ import type { CreateTaskPayload, Task, UpdateTaskPayload } from '@entities/task/
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { getNowIso } from '@shared/lib/date/get-now-iso';
 
-import type { CreateTagPayload, GetTasksParams, PaginatedResponse, Tag } from './types';
+import {
+    buildGetTasksQueryParams,
+    mapCreateTaskPayloadToTaskDto,
+    mapPaginatedTaskDtoResponse,
+    mapTaskDtoToTask,
+    mapUpdateTaskPayloadToTaskDto,
+} from './helpers';
+import type {
+    CreateTagPayload,
+    GetTasksParams,
+    PaginatedResponse,
+    PaginatedTaskDtoResponse,
+    Tag,
+    TaskDto,
+} from './types';
 
 export const entitiesApi = createApi({
     reducerPath: 'entitiesApi',
@@ -10,42 +24,12 @@ export const entitiesApi = createApi({
     tagTypes: ['Task', 'Tag'],
     endpoints: (builder) => ({
         getTasks: builder.query<PaginatedResponse<Task>, GetTasksParams | void>({
-            query: (queryParams) => {
-                const params: Record<string, string> = {};
-
-                if (queryParams?.page) {
-                    params._page = String(queryParams.page);
-                }
-
-                if (queryParams?.perPage) {
-                    params._per_page = String(queryParams.perPage);
-                }
-
-                if (queryParams?.status) {
-                    params.status = queryParams.status;
-                }
-
-                if (queryParams?.priority) {
-                    params.priority = queryParams.priority;
-                }
-
-                if (queryParams?.tag) {
-                    params.tags_like = queryParams.tag;
-                }
-
-                if (queryParams?.search) {
-                    params.q = queryParams.search;
-                }
-
-                if (queryParams?.sortBy) {
-                    params._sort =
-                        queryParams.sortOrder === 'desc'
-                            ? `-${queryParams.sortBy}`
-                            : queryParams.sortBy;
-                }
-
-                return { url: '/tasks', params };
-            },
+            query: (queryParams) => ({
+                url: '/tasks',
+                params: buildGetTasksQueryParams(queryParams),
+            }),
+            transformResponse: (response: PaginatedTaskDtoResponse) =>
+                mapPaginatedTaskDtoResponse(response),
             providesTags: (result) =>
                 result
                     ? [
@@ -56,19 +40,21 @@ export const entitiesApi = createApi({
         }),
         getTaskById: builder.query<Task, string>({
             query: (id) => `/tasks/${id}`,
+            transformResponse: (response: TaskDto) => mapTaskDtoToTask(response),
             providesTags: (_result, _error, id) => [{ type: 'Task', id }],
         }),
         createTask: builder.mutation<Task, CreateTaskPayload>({
             query: (payload) => {
                 const now = getNowIso();
                 const body = {
-                    ...payload,
+                    ...mapCreateTaskPayloadToTaskDto(payload),
                     createdAt: now,
                     updatedAt: now,
                 };
 
                 return { url: '/tasks', method: 'POST', body };
             },
+            transformResponse: (response: TaskDto) => mapTaskDtoToTask(response),
             invalidatesTags: [{ type: 'Task', id: 'LIST' }],
         }),
         updateTask: builder.mutation<Task, { id: string; data: UpdateTaskPayload }>({
@@ -76,10 +62,11 @@ export const entitiesApi = createApi({
                 url: `/tasks/${id}`,
                 method: 'PATCH',
                 body: {
-                    ...data,
+                    ...mapUpdateTaskPayloadToTaskDto(data),
                     updatedAt: getNowIso(),
                 },
             }),
+            transformResponse: (response: TaskDto) => mapTaskDtoToTask(response),
             invalidatesTags: (_result, _error, { id }) => [{ type: 'Task', id }],
         }),
         deleteTask: builder.mutation<void, string>({
@@ -92,6 +79,7 @@ export const entitiesApi = createApi({
                 method: 'PATCH',
                 body: { status },
             }),
+            transformResponse: (response: TaskDto) => mapTaskDtoToTask(response),
             async onQueryStarted({ id, status }, { dispatch, getState, queryFulfilled }) {
                 const taskDetailsPatch = dispatch(
                     entitiesApi.util.updateQueryData('getTaskById', id, (draft) => {

@@ -5,11 +5,7 @@
       "status": "todo",
       "priority": "medium",
       "deadline": "2026-04-15",
-      "tags": [
-        "React",
-        "RTK Query",
-        "Free"
-      ],
+      "tags": "React,RTK Query,Free",
       "createdAt": "2026-04-15T10:21:05.519Z",
       "updatedAt": "2026-04-15T10:21:05.519Z",
       "id": "1YPwsmvDv0s"
@@ -19,11 +15,7 @@
       "status": "todo",
       "priority": "high",
       "deadline": "2026-04-16",
-      "tags": [
-        "Backend",
-        "Java",
-        "OOP"
-      ],
+      "tags": "Backend,Java,OOP",
       "createdAt": "2026-04-15T10:21:51.296Z",
       "updatedAt": "2026-04-15T10:21:51.296Z",
       "id": "Mjk0jL1-G1U"
@@ -33,9 +25,7 @@
       "status": "todo",
       "priority": "medium",
       "deadline": "2026-04-18",
-      "tags": [
-        "React"
-      ],
+      "tags":  "React",
       "createdAt": "2026-04-15T10:22:08.984Z",
       "updatedAt": "2026-04-15T10:22:08.984Z",
       "id": "AiRHlEafwhg"
@@ -45,9 +35,7 @@
       "status": "todo",
       "priority": "low",
       "deadline": "2026-04-22",
-      "tags": [
-        "RTK Query"
-      ],
+      "tags": "RTK Query",
       "createdAt": "2026-04-15T10:22:45.617Z",
       "updatedAt": "2026-04-15T10:22:45.617Z",
       "id": "HXQCVbhWiuA"
