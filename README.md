@@ -91,8 +91,8 @@ Examples:
 ## Development Timeline
 
 Development period:
-- start: April 11, 2026
-- current implementation stage: April 15, 2026
+- start date: April 11, 2026
+- end date: April 15, 2026
 
 ## Notes on Technology Choices
 
