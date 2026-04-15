@@ -1,4 +1,4 @@
-import type { TaskPriority, TaskStatus } from '../task/model/types';
+import type { Task, TaskPriority, TaskStatus } from '../task/model/types';
 
 export type TasksSortBy = 'createdAt' | 'deadline';
 
@@ -31,3 +31,11 @@ export interface Tag {
 }
 
 export type CreateTagPayload = Omit<Tag, 'id'>;
+
+export interface TaskDto extends Omit<Task, 'tags'> {
+    tags: string;
+}
+
+export interface PaginatedTaskDtoResponse extends Omit<PaginatedResponse<TaskDto>, 'data'> {
+    data: TaskDto[];
+}
