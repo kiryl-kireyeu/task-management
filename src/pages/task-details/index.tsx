@@ -1,12 +1,11 @@
 import { useDeleteTaskMutation, useGetTaskByIdQuery } from '@entities/api/api';
 import { isTaskOverdue } from '@entities/task/lib/is-task-overdue';
-import TaskTags from '@entities/task/ui/task-tags';
+import TaskDescription from '@entities/task/ui/task-description';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import { alpha } from '@mui/material/styles';
 import { skipToken } from '@reduxjs/toolkit/query';
 import Loader from '@shared/ui/loader';
 import PageError from '@shared/ui/page-error';
@@ -14,7 +13,8 @@ import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import TaskDeleteDialog from './ui/task-delete-dialog';
-import TaskDetailsActions from './ui/task-details-actions';
+import TaskDetailsFooter from './ui/task-details-footer';
+import TaskDetailsHeader from './ui/task-details-header';
 import TaskDetailsMeta from './ui/task-details-meta';
 
 const TaskDetailsPage = () => {
@@ -66,28 +66,25 @@ const TaskDetailsPage = () => {
                 К списку задач
             </Button>
             <Paper
-                sx={{ p: 4, borderLeft: 4, borderColor: isOverdue ? 'error.main' : 'primary.main' }}
+                sx={(theme) => ({
+                    p: 4,
+                    borderLeft: 4,
+                    borderColor: isOverdue ? 'error.main' : 'primary.main',
+                    bgcolor: isOverdue ? alpha(theme.palette.error.main, 0.06) : 'background.paper',
+                })}
             >
-                <Stack
-                    direction="row"
-                    sx={{ justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}
-                >
-                    <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                        {task.title}
-                    </Typography>
-                </Stack>
-
+                <TaskDetailsHeader
+                    priority={task.priority}
+                    status={task.status}
+                    title={task.title}
+                />
                 <TaskDetailsMeta isOverdue={isOverdue} task={task} />
+                <TaskDescription description={task.description} mode="full" variant="body1" />
 
-                {task.description && (
-                    <Typography variant="body1" sx={{ mb: 3, whiteSpace: 'pre-wrap' }}>
-                        {task.description}
-                    </Typography>
-                )}
-                <TaskTags tags={task.tags} />
-                <TaskDetailsActions
+                <TaskDetailsFooter
                     onDeleteClick={() => setDeleteOpen(true)}
                     onEditClick={() => navigate(`/edit/${task.id}`)}
+                    tags={task.tags}
                 />
             </Paper>
             <TaskDeleteDialog

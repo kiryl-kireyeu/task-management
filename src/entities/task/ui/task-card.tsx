@@ -7,10 +7,10 @@ import type { MouseEvent } from 'react';
 import { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import TaskCardDeadline from './task-card-deadline';
-import TaskCardDescription from './task-card-description';
 import TaskCardFooter from './task-card-footer';
 import TaskCardHeader from './task-card-header';
+import TaskDeadline from './task-deadline';
+import TaskDescription from './task-description';
 import { isTaskOverdue } from '../lib/is-task-overdue';
 import { PRIORITY_COLORS, PRIORITY_LABELS } from '../model/constants';
 import type { Task, TaskStatus } from '../model/types';
@@ -63,8 +63,8 @@ const TaskCard = ({ task, onTagClick }: TaskCardProps) => {
                     label={PRIORITY_LABELS[task.priority]}
                     title={task.title}
                 />
-                <TaskCardDescription description={task.description} />
-                <TaskCardDeadline deadline={task.deadline} isOverdue={isOverdue} />
+                <TaskDescription description={task.description} mode="clamped" />
+                <TaskDeadline deadline={task.deadline} isOverdue={isOverdue} sx={{ mb: 1 }} />
                 <TaskCardFooter
                     onStatusChange={handleStatusChange}
                     onTagClick={handleTagClick}
