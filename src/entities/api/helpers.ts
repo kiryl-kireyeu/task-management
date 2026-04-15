@@ -32,7 +32,7 @@ export const buildGetTasksQueryParams = (queryParams?: GetTasksParams | void) =>
     }
 
     if (queryParams?.search) {
-        params.q = queryParams.search;
+        params['title:contains'] = queryParams.search;
     }
 
     if (queryParams?.sortBy) {
