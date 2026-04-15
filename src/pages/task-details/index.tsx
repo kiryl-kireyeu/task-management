@@ -75,10 +75,6 @@ const TaskDetailsPage = () => {
                     <Typography variant="h4" sx={{ fontWeight: 700 }}>
                         {task.title}
                     </Typography>
-                    <TaskDetailsActions
-                        onDeleteClick={() => setDeleteOpen(true)}
-                        onEditClick={() => navigate(`/edit/${task.id}`)}
-                    />
                 </Stack>
 
                 <TaskDetailsMeta isOverdue={isOverdue} task={task} />
@@ -89,6 +85,10 @@ const TaskDetailsPage = () => {
                     </Typography>
                 )}
                 <TaskTags tags={task.tags} />
+                <TaskDetailsActions
+                    onDeleteClick={() => setDeleteOpen(true)}
+                    onEditClick={() => navigate(`/edit/${task.id}`)}
+                />
             </Paper>
             <TaskDeleteDialog
                 open={deleteOpen}

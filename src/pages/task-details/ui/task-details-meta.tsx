@@ -19,12 +19,19 @@ const TaskDetailsMeta = ({ isOverdue, task }: TaskDetailsMetaProps) => {
     return (
         <>
             <Stack direction="row" spacing={1} sx={{ mb: 3 }}>
-                <Chip color={STATUS_COLORS[task.status]} label={STATUS_LABELS[task.status]} />
+                <Chip
+                    color={STATUS_COLORS[task.status]}
+                    label={STATUS_LABELS[task.status]}
+                    size="small"
+                />
                 <Chip
                     color={PRIORITY_COLORS[task.priority]}
                     label={PRIORITY_LABELS[task.priority]}
+                    size="small"
                 />
-                {isOverdue ? <Chip color="error" label="Просрочено" variant="outlined" /> : null}
+                {isOverdue ? (
+                    <Chip color="error" label="Просрочено" variant="outlined" size="small" />
+                ) : null}
             </Stack>
 
             <Stack spacing={1} sx={{ mb: 3 }}>

@@ -6,10 +6,10 @@ import FormLabel from '@mui/material/FormLabel';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Radio from '@mui/material/Radio';
-import Select from '@mui/material/Select';
-import { Controller } from 'react-hook-form';
-import TextField from '@mui/material/TextField';
 import RadioGroup from '@mui/material/RadioGroup';
+import Select from '@mui/material/Select';
+import TextField from '@mui/material/TextField';
+import { Controller } from 'react-hook-form';
 
 import TaskTagsAutocomplete from './task-tags-autocomplete';
 import { TASK_FORM_PRIORITY_OPTIONS, TASK_FORM_STATUS_OPTIONS } from '../model/constants';
