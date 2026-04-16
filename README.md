@@ -166,3 +166,4 @@ Still open for further polishing:
 - final tag filtering/storage refinement on mock backend
 - additional tests for full CRUD flow
 - final UX cleanup for create/edit flows
+- move all UI texts into a separate JSON file to enable future localization support
